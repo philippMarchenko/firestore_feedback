@@ -1,0 +1,15 @@
+{
+  "@@locale": "en",
+  "feedbackTitle": "Feedback",
+  "feedbackWelcome": "We'd love to hear from you!",
+  "feedbackTypeSuggestion": "Suggestion",
+  "feedbackTypeBug": "Bug Report",
+  "feedbackTypeOther": "Other",
+  "feedbackEmailHint": "Email (optional)",
+  "feedbackDetailsLabel": "Tell us more",
+  "feedbackDetailsHint": "Share your thoughts, ideas, or report an issue...",
+  "feedbackSubmit": "Submit Feedback",
+  "feedbackSuccess": "Thank you for your feedback!",
+  "feedbackError": "Failed to send feedback. Please try again."
+}
+

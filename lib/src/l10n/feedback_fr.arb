@@ -1,0 +1,15 @@
+{
+  "@@locale": "fr",
+  "feedbackTitle": "Commentaires",
+  "feedbackWelcome": "Nous aimerions avoir de vos nouvelles !",
+  "feedbackTypeSuggestion": "Suggestion",
+  "feedbackTypeBug": "Rapport de bug",
+  "feedbackTypeOther": "Autre",
+  "feedbackEmailHint": "E-mail (facultatif)",
+  "feedbackDetailsLabel": "Dites-nous en plus",
+  "feedbackDetailsHint": "Partagez vos pensées, idées ou signalez un problème...",
+  "feedbackSubmit": "Envoyer les commentaires",
+  "feedbackSuccess": "Merci pour vos commentaires !",
+  "feedbackError": "Échec de l'envoi des commentaires. Veuillez réessayer."
+}
+

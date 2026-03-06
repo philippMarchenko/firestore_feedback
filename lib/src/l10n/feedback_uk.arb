@@ -1,0 +1,15 @@
+{
+  "@@locale": "uk",
+  "feedbackTitle": "Зворотний зв'язок",
+  "feedbackWelcome": "Ми будемо раді почути вашу думку!",
+  "feedbackTypeSuggestion": "Пропозиція",
+  "feedbackTypeBug": "Повідомлення про помилку",
+  "feedbackTypeOther": "Інше",
+  "feedbackEmailHint": "Ел. пошта (необов'язково)",
+  "feedbackDetailsLabel": "Розкажіть детальніше",
+  "feedbackDetailsHint": "Поділіться своїми думками, ідеями або повідомте про проблему...",
+  "feedbackSubmit": "Надіслати відгук",
+  "feedbackSuccess": "Дякуємо за ваш відгук!",
+  "feedbackError": "Не вдалося надіслати відгук. Спробуйте ще раз."
+}
+

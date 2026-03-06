@@ -1,0 +1,15 @@
+{
+  "@@locale": "de",
+  "feedbackTitle": "Feedback",
+  "feedbackWelcome": "Wir würden uns freuen, von Ihnen zu hören!",
+  "feedbackTypeSuggestion": "Vorschlag",
+  "feedbackTypeBug": "Fehlerbericht",
+  "feedbackTypeOther": "Sonstiges",
+  "feedbackEmailHint": "E-Mail (optional)",
+  "feedbackDetailsLabel": "Erzählen Sie uns mehr",
+  "feedbackDetailsHint": "Teilen Sie Ihre Gedanken, Ideen oder melden Sie ein Problem...",
+  "feedbackSubmit": "Feedback senden",
+  "feedbackSuccess": "Vielen Dank für Ihr Feedback!",
+  "feedbackError": "Feedback konnte nicht gesendet werden. Bitte versuchen Sie es erneut."
+}
+

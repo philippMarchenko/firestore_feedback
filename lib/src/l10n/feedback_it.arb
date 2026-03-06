@@ -1,0 +1,15 @@
+{
+  "@@locale": "it",
+  "feedbackTitle": "Feedback",
+  "feedbackWelcome": "Ci piacerebbe sentirti!",
+  "feedbackTypeSuggestion": "Suggerimento",
+  "feedbackTypeBug": "Segnalazione di bug",
+  "feedbackTypeOther": "Altro",
+  "feedbackEmailHint": "Email (opzionale)",
+  "feedbackDetailsLabel": "Raccontaci di più",
+  "feedbackDetailsHint": "Condividi i tuoi pensieri, idee o segnala un problema...",
+  "feedbackSubmit": "Invia feedback",
+  "feedbackSuccess": "Grazie per il tuo feedback!",
+  "feedbackError": "Impossibile inviare il feedback. Riprova."
+}
+

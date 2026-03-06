@@ -1,0 +1,15 @@
+{
+  "@@locale": "ru",
+  "feedbackTitle": "Обратная связь",
+  "feedbackWelcome": "Мы будем рады услышать ваше мнение!",
+  "feedbackTypeSuggestion": "Предложение",
+  "feedbackTypeBug": "Сообщение об ошибке",
+  "feedbackTypeOther": "Другое",
+  "feedbackEmailHint": "Эл. почта (необязательно)",
+  "feedbackDetailsLabel": "Расскажите подробнее",
+  "feedbackDetailsHint": "Поделитесь своими мыслями, идеями или сообщите о проблеме...",
+  "feedbackSubmit": "Отправить отзыв",
+  "feedbackSuccess": "Спасибо за ваш отзыв!",
+  "feedbackError": "Не удалось отправить отзыв. Попробуйте ещё раз."
+}
+

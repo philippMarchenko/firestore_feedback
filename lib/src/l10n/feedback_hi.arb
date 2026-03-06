@@ -1,0 +1,15 @@
+{
+  "@@locale": "hi",
+  "feedbackTitle": "फ़ीडबैक",
+  "feedbackWelcome": "हम आपसे सुनना पसंद करेंगे!",
+  "feedbackTypeSuggestion": "सुझाव",
+  "feedbackTypeBug": "बग रिपोर्ट",
+  "feedbackTypeOther": "अन्य",
+  "feedbackEmailHint": "ईमेल (वैकल्पिक)",
+  "feedbackDetailsLabel": "हमें और बताएं",
+  "feedbackDetailsHint": "अपने विचार, विचार साझा करें या किसी समस्या की रिपोर्ट करें...",
+  "feedbackSubmit": "फ़ीडबैक सबमिट करें",
+  "feedbackSuccess": "आपके फ़ीडबैक के लिए धन्यवाद!",
+  "feedbackError": "फ़ीडबैक भेजने में विफल। कृपया पुनः प्रयास करें।"
+}
+

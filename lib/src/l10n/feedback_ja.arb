@@ -1,0 +1,15 @@
+{
+  "@@locale": "ja",
+  "feedbackTitle": "フィードバック",
+  "feedbackWelcome": "ご意見をお聞かせください！",
+  "feedbackTypeSuggestion": "提案",
+  "feedbackTypeBug": "バグ報告",
+  "feedbackTypeOther": "その他",
+  "feedbackEmailHint": "メール（任意）",
+  "feedbackDetailsLabel": "詳しく教えてください",
+  "feedbackDetailsHint": "ご意見、アイデア、または問題を報告してください...",
+  "feedbackSubmit": "フィードバックを送信",
+  "feedbackSuccess": "フィードバックありがとうございます！",
+  "feedbackError": "フィードバックの送信に失敗しました。もう一度お試しください。"
+}
+

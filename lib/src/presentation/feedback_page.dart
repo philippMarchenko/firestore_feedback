@@ -3,22 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 
 import '../data/suggestions_repository.dart';
-import '../l10n/feedback_strings.dart';
+import '../l10n/generated/feedback_localizations.dart';
 import 'feedback_cubit.dart';
 
 /// The feedback screen widget.
 ///
-/// Prefer using [FeedbackSDK.show] unless you need to embed this widget
-/// directly (e.g., inside a [go_router] route).
+/// Prefer using [FeedbackSDK.show] — it wraps this widget with the
+/// necessary [Localizations] delegate automatically.
 class FeedbackPage extends StatefulWidget {
-  const FeedbackPage({
-    super.key,
-    required this.repository,
-    this.strings = const FeedbackStrings(),
-  });
+  const FeedbackPage({super.key, required this.repository});
 
   final SuggestionsRepository repository;
-  final FeedbackStrings strings;
 
   @override
   State<FeedbackPage> createState() => _FeedbackPageState();
@@ -29,14 +24,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
   final TextEditingController _controller = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    _selectedType = widget.strings.typeSuggestion;
-    _controller.addListener(() {
-      if (mounted) setState(() {});
-    });
-  }
+  // Initialise _selectedType lazily on first build so we have a context.
+  bool _initialised = false;
 
   @override
   void dispose() {
@@ -75,7 +64,14 @@ class _FeedbackPageState extends State<FeedbackPage> {
 
   @override
   Widget build(BuildContext context) {
-    final s = widget.strings;
+    final l10n = FeedbackLocalizations.of(context);
+
+    // Set selectedType once we have l10n available.
+    if (!_initialised) {
+      _selectedType = l10n.feedbackTypeSuggestion;
+      _controller.addListener(() { if (mounted) setState(() {}); });
+      _initialised = true;
+    }
 
     return BlocProvider<FeedbackCubit>(
       create: (_) => FeedbackCubit(repository: widget.repository),
@@ -85,7 +81,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
             icon: const Icon(Icons.arrow_back),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: Text(s.title),
+          title: Text(l10n.feedbackTitle),
           elevation: 0,
         ),
         body: Padding(
@@ -93,13 +89,19 @@ class _FeedbackPageState extends State<FeedbackPage> {
           child: BlocConsumer<FeedbackCubit, FeedbackState>(
             listener: (context, state) {
               if (state.status == FeedbackStatus.success) {
-                _showSnackBar(context, s.successMessage);
+                _showSnackBar(context, l10n.feedbackSuccess);
                 _controller.clear();
                 _emailController.clear();
-                setState(() => _selectedType = s.typeSuggestion);
+                setState(() {
+                  _selectedType = l10n.feedbackTypeSuggestion;
+                });
                 Navigator.of(context).pop();
               } else if (state.status == FeedbackStatus.error) {
-                _showSnackBar(context, state.errorMessage ?? s.errorMessage, isError: true);
+                _showSnackBar(
+                  context,
+                  state.errorMessage ?? l10n.feedbackError,
+                  isError: true,
+                );
               }
             },
             builder: (context, state) {
@@ -115,7 +117,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Hero animation with welcome text overlay
+                      // Hero animation
                       Center(
                         child: SizedBox(
                           height: 220,
@@ -152,7 +154,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                     ],
                                   ),
                                   child: Text(
-                                    s.welcomeMessage,
+                                    l10n.feedbackWelcome,
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600,
@@ -174,9 +176,9 @@ class _FeedbackPageState extends State<FeedbackPage> {
                         runSpacing: 0,
                         children: [
                           for (final type in [
-                            s.typeSuggestion,
-                            s.typeBug,
-                            s.typeOther,
+                            l10n.feedbackTypeSuggestion,
+                            l10n.feedbackTypeBug,
+                            l10n.feedbackTypeOther,
                           ])
                             ChoiceChip(
                               label: Text(type),
@@ -202,12 +204,12 @@ class _FeedbackPageState extends State<FeedbackPage> {
 
                       const SizedBox(height: 16),
 
-                      // Optional email field
+                      // Optional email
                       TextField(
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
-                          hintText: s.emailHint,
+                          hintText: l10n.feedbackEmailHint,
                           prefixIcon: const Icon(Icons.email),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -219,16 +221,15 @@ class _FeedbackPageState extends State<FeedbackPage> {
 
                       const SizedBox(height: 12),
 
-                      Text(s.detailsLabel,
-                          style:
-                              const TextStyle(fontWeight: FontWeight.w500)),
+                      Text(l10n.feedbackDetailsLabel,
+                          style: const TextStyle(fontWeight: FontWeight.w500)),
                       const SizedBox(height: 8),
 
                       TextField(
                         controller: _controller,
                         maxLines: 6,
                         decoration: InputDecoration(
-                          hintText: s.detailsHint,
+                          hintText: l10n.feedbackDetailsHint,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -243,7 +244,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
                         width: double.infinity,
                         height: 48,
                         child: ElevatedButton(
-                          onPressed: isSubmitting || _controller.text.trim().isEmpty
+                          onPressed: isSubmitting ||
+                                  _controller.text.trim().isEmpty
                               ? null
                               : () async {
                                   final cubit = context.read<FeedbackCubit>();
@@ -258,10 +260,10 @@ class _FeedbackPageState extends State<FeedbackPage> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: colorScheme.primary,
                             foregroundColor: colorScheme.onPrimary,
-                            disabledBackgroundColor:
-                                colorScheme.primary.withAlpha((0.48 * 255).round()),
-                            disabledForegroundColor:
-                                colorScheme.onPrimary.withAlpha((0.72 * 255).round()),
+                            disabledBackgroundColor: colorScheme.primary
+                                .withAlpha((0.48 * 255).round()),
+                            disabledForegroundColor: colorScheme.onPrimary
+                                .withAlpha((0.72 * 255).round()),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -280,7 +282,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                   ),
                                 )
                               : Text(
-                                  s.submitButton,
+                                  l10n.feedbackSubmit,
                                   style: Theme.of(context)
                                       .textTheme
                                       .labelLarge
