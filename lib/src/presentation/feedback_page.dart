@@ -10,7 +10,7 @@ import 'feedback_cubit.dart';
 ///
 /// Prefer using [FeedbackSDK.show] unless you need to embed this widget
 /// directly (e.g., inside a [go_router] route).
-class FeedbackPage extends StatefulWidget {
+class FeedbackPageca extends StatefulWidget {
   const FeedbackPage({
     super.key,
     required this.repository,
@@ -47,13 +47,28 @@ class _FeedbackPageState extends State<FeedbackPage> {
 
   void _showSnackBar(BuildContext context, String message, {bool isError = false}) {
     final cs = Theme.of(context).colorScheme;
+    final bg = isError ? cs.errorContainer : cs.primaryContainer;
+    final fg = isError ? cs.onErrorContainer : cs.onPrimaryContainer;
+    final icon = isError ? Icons.error : Icons.check_circle;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(message),
-        backgroundColor: isError ? cs.errorContainer : cs.primaryContainer,
+        content: Row(
+          children: [
+            Icon(icon, color: fg, size: 20),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                message,
+                style: TextStyle(color: fg, fontWeight: FontWeight.w500),
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: bg,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         margin: const EdgeInsets.all(16),
+        duration: const Duration(seconds: 3),
       ),
     );
   }
@@ -228,30 +243,52 @@ class _FeedbackPageState extends State<FeedbackPage> {
                         width: double.infinity,
                         height: 48,
                         child: ElevatedButton(
-                          onPressed: isSubmitting ||
-                                  _controller.text.trim().isEmpty
+                          onPressed: isSubmitting || _controller.text.trim().isEmpty
                               ? null
                               : () async {
-                                  final cubit =
-                                      context.read<FeedbackCubit>();
+                                  final cubit = context.read<FeedbackCubit>();
                                   await cubit.sendSuggestion(
                                     type: _selectedType,
                                     text: _controller.text.trim(),
-                                    email: _emailController.text
-                                            .trim()
-                                            .isNotEmpty
+                                    email: _emailController.text.trim().isNotEmpty
                                         ? _emailController.text.trim()
                                         : null,
                                   );
                                 },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: colorScheme.primary,
+                            foregroundColor: colorScheme.onPrimary,
+                            disabledBackgroundColor:
+                                colorScheme.primary.withAlpha((0.48 * 255).round()),
+                            disabledForegroundColor:
+                                colorScheme.onPrimary.withAlpha((0.72 * 255).round()),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            elevation: 2,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 24, vertical: 12),
+                          ),
                           child: isSubmitting
-                              ? const SizedBox(
+                              ? SizedBox(
                                   width: 20,
                                   height: 20,
                                   child: CircularProgressIndicator(
-                                      strokeWidth: 2),
+                                    strokeWidth: 2,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        colorScheme.onPrimary),
+                                  ),
                                 )
-                              : Text(s.submitButton),
+                              : Text(
+                                  s.submitButton,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelLarge
+                                      ?.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        color: colorScheme.onPrimary,
+                                      ),
+                                ),
                         ),
                       ),
                     ],
