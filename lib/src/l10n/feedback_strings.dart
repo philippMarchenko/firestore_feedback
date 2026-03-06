@@ -5,14 +5,14 @@
 class FeedbackStrings {
   const FeedbackStrings({
     this.title = 'Feedback',
-    this.welcomeMessage = 'Share your thoughts',
+    this.welcomeMessage = "We'd love to hear from you!",
     this.typeSuggestion = 'Suggestion',
-    this.typeBug = 'Bug',
+    this.typeBug = 'Bug Report',
     this.typeOther = 'Other',
     this.emailHint = 'Email (optional)',
-    this.detailsLabel = 'Details',
-    this.detailsHint = 'Describe your feedback…',
-    this.submitButton = 'Send',
+    this.detailsLabel = 'Tell us more',
+    this.detailsHint = 'Share your thoughts, ideas, or report an issue...',
+    this.submitButton = 'Submit Feedback',
     this.successMessage = 'Thank you for your feedback!',
     this.errorMessage = 'Failed to send feedback. Please try again.',
   });
