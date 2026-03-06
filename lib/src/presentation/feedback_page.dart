@@ -10,7 +10,7 @@ import 'feedback_cubit.dart';
 ///
 /// Prefer using [FeedbackSDK.show] unless you need to embed this widget
 /// directly (e.g., inside a [go_router] route).
-class FeedbackPageca extends StatefulWidget {
+class FeedbackPage extends StatefulWidget {
   const FeedbackPage({
     super.key,
     required this.repository,
