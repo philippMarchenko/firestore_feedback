@@ -28,10 +28,13 @@ class FeedbackSDK {
   ///
   /// [collectionPath] – Firestore collection to write to. Defaults to `'suggestions'`.
   /// [firestore] – optional [FirebaseFirestore] instance for non-default Firebase apps.
+  /// [animationColor] – optional tint color for the Lottie animation. Defaults to
+  /// the original animation palette when `null`.
   static Future<void> show(
     BuildContext context, {
     String collectionPath = 'suggestions',
     FirebaseFirestore? firestore,
+    Color? animationColor,
   }) {
     final repository = SuggestionsRepository(
       firestore: firestore,
@@ -43,7 +46,10 @@ class FeedbackSDK {
         builder: (_) => Localizations.override(
           context: context,
           delegates: FeedbackLocalizations.localizationsDelegates,
-          child: FeedbackPage(repository: repository),
+          child: FeedbackPage(
+            repository: repository,
+            animationColor: animationColor,
+          ),
         ),
       ),
     );

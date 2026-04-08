@@ -11,9 +11,20 @@ import 'feedback_cubit.dart';
 /// Prefer using [FeedbackSDK.show] — it wraps this widget with the
 /// necessary [Localizations] delegate automatically.
 class FeedbackPage extends StatefulWidget {
-  const FeedbackPage({super.key, required this.repository});
+  const FeedbackPage({
+    super.key,
+    required this.repository,
+    this.animationColor,
+  });
 
   final SuggestionsRepository repository;
+
+  /// Optional tint color applied to the Lottie animation.
+  ///
+  /// When non-null every layer of the animation is tinted with this color
+  /// using [BlendMode.srcIn], replacing the original palette while preserving
+  /// transparency. Defaults to `null` (original colors).
+  final Color? animationColor;
 
   @override
   State<FeedbackPage> createState() => _FeedbackPageState();
@@ -132,6 +143,19 @@ class _FeedbackPageState extends State<FeedbackPage> {
                                     'packages/firestore_feedback/assets/lottie/feedback.json',
                                     fit: BoxFit.contain,
                                     repeat: true,
+                                    delegates: widget.animationColor != null
+                                        ? LottieDelegates(
+                                            values: [
+                                              ValueDelegate.colorFilter(
+                                                ['**'],
+                                                value: ColorFilter.mode(
+                                                  widget.animationColor!,
+                                                  BlendMode.srcIn,
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        : null,
                                   ),
                                 ),
                               ),

@@ -1,6 +1,6 @@
 name: firestore_feedback
 description: "A reusable Flutter feedback widget that submits user suggestions/bug reports to Firestore."
-version: 0.1.0
+version: 0.2.1
 publish_to: none
 
 environment:
