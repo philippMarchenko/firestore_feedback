@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
 
 import '../data/suggestions_repository.dart';
 import '../l10n/generated/feedback_localizations.dart';
+import 'feedback_animation.dart';
 import 'feedback_cubit.dart';
 
 /// The feedback screen widget.
@@ -19,11 +19,9 @@ class FeedbackPage extends StatefulWidget {
 
   final SuggestionsRepository repository;
 
-  /// Optional tint color applied to the Lottie animation.
+  /// Optional tint color for the feedback animation.
   ///
-  /// When non-null every layer of the animation is tinted with this color
-  /// using [BlendMode.srcIn], replacing the original palette while preserving
-  /// transparency. Defaults to `null` (original colors).
+  /// Defaults to [ColorScheme.primary] when null.
   final Color? animationColor;
 
   @override
@@ -139,23 +137,9 @@ class _FeedbackPageState extends State<FeedbackPage> {
                               Align(
                                 alignment: Alignment.center,
                                 child: ExcludeSemantics(
-                                  child: Lottie.asset(
-                                    'packages/firestore_feedback/assets/lottie/feedback.json',
-                                    fit: BoxFit.contain,
-                                    repeat: true,
-                                    delegates: widget.animationColor != null
-                                        ? LottieDelegates(
-                                            values: [
-                                              ValueDelegate.colorFilter(
-                                                ['**'],
-                                                value: ColorFilter.mode(
-                                                  widget.animationColor!,
-                                                  BlendMode.srcIn,
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                        : null,
+                                  child: FeedbackAnimation(
+                                    color: widget.animationColor,
+                                    size: 180,
                                   ),
                                 ),
                               ),
